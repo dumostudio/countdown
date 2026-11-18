@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es" data-tema="claro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Isaac Gregory cumple 12 · Abdaylan</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&family=Montserrat:wght@600;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fffdf7; --ink:#333333; --rojo:#e5251b; --azul:#0a3cff; --verde:#18b838; --suave:#555;
+    --caja:#0a3cff; --caja-txt:#fff; --sombra:#e5251b;
+  }
+  [data-tema="oscuro"]{
+    --bg:#0b0b0f; --ink:#fff; --suave:#bbb; --caja:#1e1e28; --caja-txt:#ffcc00; --sombra:#00e5ff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:'Montserrat',system-ui,sans-serif; text-align:center;
+    height:100dvh; overflow:hidden;
+    display:flex; flex-direction:column; align-items:center; justify-content:space-evenly;
+    padding:max(14px,env(safe-area-inset-top)) 16px max(14px,env(safe-area-inset-bottom));
+  }
+  .flag{
+    width:min(100%,300px); height:clamp(78px,14dvh,110px);
+    display:grid; grid-template-rows:40% 30% 30%;
+    border:1px solid var(--ink); border-radius:12px; overflow:hidden;
+  }
+  .flag .azul{background:#0a3cff;color:#fff;display:flex;justify-content:space-around;align-items:center;font-size:clamp(.9rem,3.4dvh,1.4rem)}
+  .flag .blanco{background:#fff;color:var(--verde);display:grid;place-items:center;font:700 clamp(.8rem,2.8dvh,1.2rem) 'Fredoka',sans-serif}
+  .flag .rayas{background:repeating-linear-gradient(#e5251b 0 3px,#fff 3px 6px)}
+  .badge{
+    background:var(--ink);color:var(--bg);padding:5px 14px;border-radius:50px;
+    font-weight:800;font-size:clamp(.6rem,2.6vw,.75rem);letter-spacing:.5px;text-transform:uppercase;
+  }
+  h1{font:700 clamp(1.7rem,9vw,2.6rem)/1.05 'Fredoka',sans-serif;color:var(--rojo)}
+  .lema{font-weight:800;font-size:clamp(.8rem,3.6vw,1rem);color:var(--azul)}
+  [data-tema="oscuro"] .lema{color:#00e5ff}
+  .arcoiris{width:min(70%,220px);height:4px;border-radius:4px;
+    background:linear-gradient(90deg,#e5251b,#ff9a00,#ffd400,#18b838,#0a3cff,#8a2be2)}
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;width:100%;max-width:340px}
+  .caja{
+    background:var(--caja);color:var(--caja-txt);border:3px solid var(--ink);border-radius:12px;
+    box-shadow:3px 3px 0 var(--sombra);padding:8px 2px;
+  }
+  .num{display:block;font:700 clamp(1.6rem,9vw,2.3rem)/1 'Fredoka',sans-serif}
+  .lab{display:block;font-size:clamp(.5rem,2.4vw,.65rem);text-transform:uppercase;letter-spacing:.5px;margin-top:3px;opacity:.9}
+  .secreto{font-size:clamp(.75rem,3.4vw,.9rem);color:var(--suave);line-height:1.4;max-width:300px}
+  .wa{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    background:#25d366;color:#fff;text-decoration:none;font-weight:800;
+    font-size:clamp(.85rem,4vw,1rem);padding:14px 22px;border-radius:50px;
+    border:3px solid var(--ink);box-shadow:3px 3px 0 var(--ink);
+  }
+  .wa:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+  .firma{font-size:.65rem;color:var(--suave);letter-spacing:.3px}
+</style>
+</head>
+<body>
+
+  <div class="flag" aria-hidden="true">
+    <div class="azul"><span>☾</span><span>★</span><span>☽</span></div>
+    <div class="blanco">Alá Velik</div>
+    <div class="rayas"></div>
+  </div>
+
+  <div class="badge">República de Abdaylan · Capital: Salum</div>
+  <h1 id="titulo"></h1>
+  <p class="lema">Make countdown as soon as possible!</p>
+  <div class="arcoiris"></div>
+
+  <div class="grid" id="contador">
+    <div class="caja"><span class="num" id="d">00</span><span class="lab">Días</span></div>
+    <div class="caja"><span class="num" id="h">00</span><span class="lab">Horas</span></div>
+    <div class="caja"><span class="num" id="m">00</span><span class="lab">Min</span></div>
+    <div class="caja"><span class="num" id="s">00</span><span class="lab">Seg</span></div>
+  </div>
+
+  <p class="secreto" id="secreto">🔒 Lugar: ¡misión secreta! Los detalles se piden por WhatsApp.</p>
+  <a class="wa" id="wa" href="#" target="_blank" rel="noopener">💬 Pedir detalles por WhatsApp</a>
+  <p class="firma">#$ Isaac Gregory's official design © 2026</p>
+
+<script>
+  // ===== CONFIG: lo único que se cambia por cliente/tema =====
+  const CONFIG = {
+    nombre:   "Isaac Gregory",
+    edad:     12,
+    fecha:    new Date(2026, 10, 29, 12, 0, 0),   // año, mes (0=ene → 10=nov), día, hora, min
+    whatsapp: "528110314514",                      // 52 + número, sin espacios
+    mensaje:  "Hola, quiero los detalles de la fiesta de Isaac Gregory",
+    tema:     "claro"                              // "claro" u "oscuro"
+  };
+  // ============================================================
+
+  document.documentElement.dataset.tema = CONFIG.tema;
+  const $ = id => document.getElementById(id);
+  $("titulo").textContent = `¡${CONFIG.nombre} cumple ${CONFIG.edad}!`;
+  $("wa").href = "https://wa.me/" + CONFIG.whatsapp + "?text=" + encodeURIComponent(CONFIG.mensaje);
+
+  function tick(){
+    const dif = CONFIG.fecha - new Date();
+    if (dif <= 0){
+      $("titulo").textContent = `¡Feliz cumpleaños ${CONFIG.nombre}!`;
+      ["d","h","m","s"].forEach(id => $(id).textContent = "00");
+      $("wa").remove();
+      $("secreto").textContent = "¡Misión cumplida en Abdaylan! 🎉";
+      clearInterval(timer);
+      return;
+    }
+    const p = n => String(n).padStart(2, "0");
+    $("d").textContent = p(Math.floor(dif / 864e5));
+    $("h").textContent = p(Math.floor(dif % 864e5 / 36e5));
+    $("m").textContent = p(Math.floor(dif % 36e5 / 6e4));
+    $("s").textContent = p(Math.floor(dif % 6e4 / 1e3));
+  }
+  const timer = setInterval(tick, 1000);
+  tick();
+</script>
+</body>
+</html>
